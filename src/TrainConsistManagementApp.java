@@ -1,45 +1,37 @@
-import java.util.ArrayList;
-import java.util.List;
-
-class Bogie {
-
-    String name;
-    String type;
-    int capacity;
-
-    Bogie(String name, String type, int capacity) {
-        this.name = name;
-        this.type = type;
-        this.capacity = capacity;
-    }
-
-    public String toString() {
-        return name + " - " + type + " - " + capacity + " seats";
-    }
-}
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 public class TrainConsistManagementApp {  public static void main(String[] args) {
     System.out.println("=== Train Consist Management App ===");
 
-    // Create Bogie List
-    List<Bogie> bogies = new ArrayList<>();
+    // Sample Inputs
+    String trainId = "TRN-1234";
+    String cargoCode = "PET-AB";
 
-    bogies.add(new Bogie("Sleeper", "Passenger", 72));
-    bogies.add(new Bogie("AC Chair", "Passenger", 56));
-    bogies.add(new Bogie("First Class", "Passenger", 24));
-    bogies.add(new Bogie("General", "Passenger", 90));
+    // Regex Patterns
+    String trainPattern = "TRN-\\d{4}";
+    String cargoPattern = "PET-[A-Z]{2}";
 
-    // Display Bogies
-    System.out.println("\nPassenger Bogies:");
-    bogies.forEach(System.out::println);
+    // Compile Patterns
+    Pattern trainRegex = Pattern.compile(trainPattern);
+    Pattern cargoRegex = Pattern.compile(cargoPattern);
 
-    // Calculate Total Seats using reduce
-    int totalSeats =
-            bogies.stream()
-                    .map(b -> b.capacity)
-                    .reduce(0, Integer::sum);
+    // Create Matchers
+    Matcher trainMatcher = trainRegex.matcher(trainId);
+    Matcher cargoMatcher = cargoRegex.matcher(cargoCode);
 
-    // Display Total Seats
-    System.out.println("\nTotal Seating Capacity: " + totalSeats);
+    // Validate Train ID
+    if (trainMatcher.matches()) {
+        System.out.println("Valid Train ID: " + trainId);
+    } else {
+        System.out.println("Invalid Train ID: " + trainId);
+    }
+
+    // Validate Cargo Code
+    if (cargoMatcher.matches()) {
+        System.out.println("Valid Cargo Code: " + cargoCode);
+    } else {
+        System.out.println("Invalid Cargo Code: " + cargoCode);
+    }
 
     System.out.println("\nProgram continues...");
 }
