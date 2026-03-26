@@ -1,45 +1,47 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Map;
 class Bogie {
+
     String name;
+    String type;
     int capacity;
 
-    Bogie(String name, int capacity) {
+    Bogie(String name, String type, int capacity) {
         this.name = name;
+        this.type = type;
         this.capacity = capacity;
     }
 
     public String toString() {
-        return name + " - " + capacity + " seats";
+        return name + " - " + type + " - " + capacity + " seats";
     }
 }
-
-
-public class TrainConsistManagementApp {  public static void main(String[] args) {  System.out.println("=== Train Consist Management App ===");
+public class TrainConsistManagementApp {  public static void main(String[] args) {
+    System.out.println("=== Train Consist Management App ===");
 
     // Create Bogie List
     List<Bogie> bogies = new ArrayList<>();
 
-    // Add Bogies
-    bogies.add(new Bogie("Sleeper", 72));
-    bogies.add(new Bogie("AC Chair", 56));
-    bogies.add(new Bogie("First Class", 24));
-    bogies.add(new Bogie("General", 90));
+    bogies.add(new Bogie("Sleeper", "Passenger", 72));
+    bogies.add(new Bogie("AC Chair", "Passenger", 56));
+    bogies.add(new Bogie("First Class", "Passenger", 24));
+    bogies.add(new Bogie("Goods Wagon", "Goods", 100));
+    bogies.add(new Bogie("Parcel Van", "Goods", 80));
 
-    // Display All Bogies
-    System.out.println("\nAll Passenger Bogies:");
-    bogies.forEach(System.out::println);
-
-    // Filter Bogies (Capacity > 60)
-    List<Bogie> filteredBogies =
+    // Group Bogies by Type
+    Map<String, List<Bogie>> groupedBogies =
             bogies.stream()
-                    .filter(b -> b.capacity > 60)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.groupingBy(b -> b.type));
 
-    // Display Filtered Bogies
-    System.out.println("\nFiltered Bogies (Capacity > 60):");
-    filteredBogies.forEach(System.out::println);
+    // Display Grouped Bogies
+    System.out.println("\nGrouped Bogies:");
+
+    groupedBogies.forEach((type, list) -> {
+        System.out.println("\n" + type + " Bogies:");
+        list.forEach(System.out::println);
+    });
 
     System.out.println("\nProgram continues...");
 }
