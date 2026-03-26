@@ -26,16 +26,20 @@ public class TrainConsistManagementApp {
 
 
         // UC3 - Unique Bogie IDs
+        // UC3 - Unique Bogie IDs using HashSet
         System.out.println("\n=== Track Unique Bogie IDs ===");
 
         Set<String> bogieIDs = new HashSet<>();
 
+        // Adding Bogie IDs (with duplicates)
         bogieIDs.add("BG101");
         bogieIDs.add("BG102");
         bogieIDs.add("BG103");
-        bogieIDs.add("BG101"); // duplicate
+        bogieIDs.add("BG101");
+        bogieIDs.add("BG102");
 
-        System.out.println("Unique Bogie IDs:");
+        // Display Unique Bogie IDs
+        System.out.println("\nUnique Bogie IDs:");
         System.out.println(bogieIDs);
 
 
@@ -44,7 +48,6 @@ public class TrainConsistManagementApp {
 
         LinkedList<String> trainConsist = new LinkedList<>();
 
-        // Add bogies
         trainConsist.add("Engine");
         trainConsist.add("Sleeper");
         trainConsist.add("AC");
@@ -54,13 +57,11 @@ public class TrainConsistManagementApp {
         System.out.println("\nInitial Train Consist:");
         System.out.println(trainConsist);
 
-        // Insert Pantry Car at position 2
         trainConsist.add(2, "Pantry Car");
 
         System.out.println("\nAfter Adding Pantry Car:");
         System.out.println(trainConsist);
 
-        // Remove first and last
         trainConsist.removeFirst();
         trainConsist.removeLast();
 
@@ -69,6 +70,5 @@ public class TrainConsistManagementApp {
 
         System.out.println("\nProgram continues...");
     }
-
 
 }
