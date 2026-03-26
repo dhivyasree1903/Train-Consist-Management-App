@@ -1,50 +1,49 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.LinkedList;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Comparator;
+
+class Bogie {
+    String name;
+    int capacity;
+
+    Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    public String toString() {
+        return name + " - " + capacity;
+    }
+}
 public class TrainConsistManagementApp {  public static void main(String[] args) {
-    System.out.println("=== Train Consist Management App ===");
+    System.out.println("=== Sort Bogies by Capacity ===");
 
+    // Create List
+    List<Bogie> bogies = new ArrayList<>();
 
-    // UC5 - LinkedHashSet
-    System.out.println("\n=== Preserve Insertion Order of Bogies ===");
+    // Add Bogies
+    bogies.add(new Bogie("Sleeper", 72));
+    bogies.add(new Bogie("AC Chair", 60));
+    bogies.add(new Bogie("First Class", 24));
 
-    Set<String> formation = new LinkedHashSet<>();
+    System.out.println("\nBefore Sorting:");
+    for (Bogie b : bogies) {
+        System.out.println(b);
+    }
 
-    formation.add("Engine");
-    formation.add("Sleeper");
-    formation.add("Cargo");
-    formation.add("Guard");
-    formation.add("Sleeper"); // duplicate
+    // Sort using Comparator
+    bogies.sort(Comparator.comparingInt(b -> b.capacity));
 
-    System.out.println("Train Formation:");
-    System.out.println(formation);
-
-
-    // UC6 - HashMap
-    System.out.println("\n=== Map Bogie to Capacity ===");
-
-    Map<String, Integer> bogieCapacity = new HashMap<>();
-
-    // Add Bogie Capacity
-    bogieCapacity.put("Sleeper", 72);
-    bogieCapacity.put("AC Chair", 60);
-    bogieCapacity.put("First Class", 24);
-
-    // Display Capacity
-    for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
-        System.out.println(entry.getKey() + " -> " + entry.getValue());
+    System.out.println("\nAfter Sorting by Capacity:");
+    for (Bogie b : bogies) {
+        System.out.println(b);
     }
 
     System.out.println("\nProgram continues...");
-
-
-
 }
 }
+
+
 
 
 
