@@ -1,40 +1,47 @@
 import java.util.ArrayList;
 import java.util.List;
-public class TrainConsistManagementApp {  public static void main(String[] args) {
+public class TrainConsistManagementApp {
+    public static void main(String[] args) {
 
-    System.out.println("=== Train Consist Management App ===");
+        System.out.println("=== Train Consist Management App ===");
 
-    // Create Passenger Bogie List
-    List<String> passengerBogies = new ArrayList<>();
+        // UC2 - Passenger Bogies
+        List<String> passengerBogies = new ArrayList<>();
 
-    // Add Passenger Bogies
-    passengerBogies.add("Sleeper");
-    passengerBogies.add("AC Chair");
-    passengerBogies.add("First Class");
+        passengerBogies.add("Sleeper");
+        passengerBogies.add("AC Chair");
+        passengerBogies.add("First Class");
 
-    // Display After Adding
-    System.out.println("\nPassenger Bogies After Adding:");
-    System.out.println(passengerBogies);
+        System.out.println("\nPassenger Bogies:");
+        System.out.println(passengerBogies);
 
-    // Remove AC Chair
-    passengerBogies.remove("AC Chair");
+        passengerBogies.remove("AC Chair");
 
-    System.out.println("\nAfter Removing AC Chair:");
-    System.out.println(passengerBogies);
+        System.out.println("\nAfter Removing AC Chair:");
+        System.out.println(passengerBogies);
 
-    // Check if Sleeper Exists
-    if (passengerBogies.contains("Sleeper")) {
-        System.out.println("\nSleeper bogie exists in train");
-    } else {
-        System.out.println("\nSleeper bogie not found");
+        if (passengerBogies.contains("Sleeper")) {
+            System.out.println("\nSleeper bogie exists");
+        }
+
+        // UC3 - Unique Bogie IDs using HashSet
+        System.out.println("\n=== Track Unique Bogie IDs ===");
+
+        Set<String> bogieIDs = new HashSet<>();
+
+        // Adding Bogie IDs (with duplicates)
+        bogieIDs.add("BG101");
+        bogieIDs.add("BG102");
+        bogieIDs.add("BG103");
+        bogieIDs.add("BG101");  // Duplicate
+        bogieIDs.add("BG102");  // Duplicate
+
+        // Display Unique Bogie IDs
+        System.out.println("\nUnique Bogie IDs:");
+        System.out.println(bogieIDs);
+
+        System.out.println("\nProgram continues...");
     }
-
-    // Final List
-    System.out.println("\nFinal Passenger Bogies:");
-    System.out.println(passengerBogies);
-
-    System.out.println("\nProgram continues...");
-}
 
 
 }
