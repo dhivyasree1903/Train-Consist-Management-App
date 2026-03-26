@@ -1,13 +1,21 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+class InvalidCapacityException extends Exception {
 
-class Bogie {
+    InvalidCapacityException(String message) {
+        super(message);
+    }
+}
+
+class PassengerBogie {
 
     String name;
     int capacity;
 
-    Bogie(String name, int capacity) {
+    PassengerBogie(String name, int capacity) throws InvalidCapacityException {
+
+        if (capacity <= 0) {
+            throw new InvalidCapacityException("Capacity must be greater than zero");
+        }
+
         this.name = name;
         this.capacity = capacity;
     }
@@ -17,45 +25,21 @@ class Bogie {
     }
 }
 public class TrainConsistManagementApp {  public static void main(String[] args) {
-    System.out.println("=== Performance Comparison (Loop vs Stream) ===");
+    System.out.println("=== Passenger Bogie Validation ===");
 
-    // Create Bogie List
-    List<Bogie> bogies = new ArrayList<>();
+    try {
 
-    for (int i = 1; i <= 1000; i++) {
-        bogies.add(new Bogie("Bogie" + i, (i % 100) + 20));
+        PassengerBogie b1 = new PassengerBogie("Sleeper", 72);
+        PassengerBogie b2 = new PassengerBogie("AC Chair", 0); // Invalid
+        PassengerBogie b3 = new PassengerBogie("First Class", 24);
+
+        System.out.println(b1);
+        System.out.println(b2);
+        System.out.println(b3);
+
+    } catch (InvalidCapacityException e) {
+        System.out.println("Error: " + e.getMessage());
     }
-
-    // Loop Based Filtering
-    long startLoop = System.nanoTime();
-
-    List<Bogie> loopResult = new ArrayList<>();
-    for (Bogie b : bogies) {
-        if (b.capacity > 60) {
-            loopResult.add(b);
-        }
-    }
-
-    long endLoop = System.nanoTime();
-    long loopTime = endLoop - startLoop;
-
-    // Stream Based Filtering
-    long startStream = System.nanoTime();
-
-    List<Bogie> streamResult =
-            bogies.stream()
-                    .filter(b -> b.capacity > 60)
-                    .collect(Collectors.toList());
-
-    long endStream = System.nanoTime();
-    long streamTime = endStream - startStream;
-
-    // Display Results
-    System.out.println("\nLoop Result Size: " + loopResult.size());
-    System.out.println("Stream Result Size: " + streamResult.size());
-
-    System.out.println("\nLoop Execution Time: " + loopTime + " ns");
-    System.out.println("Stream Execution Time: " + streamTime + " ns");
 
     System.out.println("\nProgram continues...");
 
