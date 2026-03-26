@@ -1,40 +1,74 @@
 import java.util.ArrayList;
 import java.util.List;
-public class TrainConsistManagementApp {  public static void main(String[] args) {
+public class TrainConsistManagementApp {
+    public static void main(String[] args) {
 
-    System.out.println("=== Train Consist Management App ===");
+        System.out.println("=== Train Consist Management App ===");
 
-    // Create Passenger Bogie List
-    List<String> passengerBogies = new ArrayList<>();
+        // UC2 - Passenger Bogies
+        List<String> passengerBogies = new ArrayList<>();
 
-    // Add Passenger Bogies
-    passengerBogies.add("Sleeper");
-    passengerBogies.add("AC Chair");
-    passengerBogies.add("First Class");
+        passengerBogies.add("Sleeper");
+        passengerBogies.add("AC Chair");
+        passengerBogies.add("First Class");
 
-    // Display After Adding
-    System.out.println("\nPassenger Bogies After Adding:");
-    System.out.println(passengerBogies);
+        System.out.println("\nPassenger Bogies:");
+        System.out.println(passengerBogies);
 
-    // Remove AC Chair
-    passengerBogies.remove("AC Chair");
+        passengerBogies.remove("AC Chair");
 
-    System.out.println("\nAfter Removing AC Chair:");
-    System.out.println(passengerBogies);
+        System.out.println("\nAfter Removing AC Chair:");
+        System.out.println(passengerBogies);
 
-    // Check if Sleeper Exists
-    if (passengerBogies.contains("Sleeper")) {
-        System.out.println("\nSleeper bogie exists in train");
-    } else {
-        System.out.println("\nSleeper bogie not found");
+        if (passengerBogies.contains("Sleeper")) {
+            System.out.println("\nSleeper bogie exists");
+        }
+
+
+        // UC3 - Unique Bogie IDs
+        System.out.println("\n=== Track Unique Bogie IDs ===");
+
+        Set<String> bogieIDs = new HashSet<>();
+
+        bogieIDs.add("BG101");
+        bogieIDs.add("BG102");
+        bogieIDs.add("BG103");
+        bogieIDs.add("BG101"); // duplicate
+
+        System.out.println("Unique Bogie IDs:");
+        System.out.println(bogieIDs);
+
+
+        // UC4 - Maintain Ordered Train Consist
+        System.out.println("\n=== Maintain Ordered Train Consist ===");
+
+        LinkedList<String> trainConsist = new LinkedList<>();
+
+        // Add bogies
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("Cargo");
+        trainConsist.add("Guard");
+
+        System.out.println("\nInitial Train Consist:");
+        System.out.println(trainConsist);
+
+        // Insert Pantry Car at position 2
+        trainConsist.add(2, "Pantry Car");
+
+        System.out.println("\nAfter Adding Pantry Car:");
+        System.out.println(trainConsist);
+
+        // Remove first and last
+        trainConsist.removeFirst();
+        trainConsist.removeLast();
+
+        System.out.println("\nFinal Ordered Train Consist:");
+        System.out.println(trainConsist);
+
+        System.out.println("\nProgram continues...");
     }
-
-    // Final List
-    System.out.println("\nFinal Passenger Bogies:");
-    System.out.println(passengerBogies);
-
-    System.out.println("\nProgram continues...");
-}
 
 
 }
